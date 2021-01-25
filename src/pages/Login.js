@@ -35,12 +35,17 @@ const  Login=()=> {
             return response.data;
         })
         .then(response=>{
-            if(response.length>0 ){
-                var respuesta=response[0];
-                if ( match(respuesta.nombre_usuario,respuesta.clave_acceso)){
-                        cookies.set('usuario', respuesta.nombre_usuario, {path: "/"});
-                        cookies.set('contrasenia', respuesta.clave_acceso, {path: "/"});                    
-                        alert(`Bienvenido ${respuesta.nombre_usuario} ${respuesta.clave_acceso}`);
+            if(response.length>0 ){                
+               let existe = response.some(function (el){
+                        setUser(el.nombre_usuario);
+                        setPass(el.clave_acceso)  ;                  
+                        return match(el.nombre_usuario,el.clave_acceso);
+                } );
+                
+                if (existe){
+                        cookies.set('usuario', user, {path: "/"});
+                        cookies.set('contrasenia', pass, {path: "/"});                    
+                        alert(`Bienvenido ${user} ${pass}`);
                         window.location.href="./menu";
                 }else{
                     alert('El usuario o la contraseña no son correctos');

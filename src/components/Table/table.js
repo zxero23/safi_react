@@ -41,7 +41,7 @@ const Table = () => {
                     <td>{importe}</td>
                     <td>{descripcion}</td>                   
                     <td className='accion'>
-                            <i class="material-icons">autorenew</i>
+                            <i className="material-icons">autorenew</i>
                     </td>
                 </tr>
             )
@@ -50,7 +50,7 @@ const Table = () => {
 
     return (
         <>
-            <p class="flow-text">Movimientos</p>
+            <p className="flow-text">Movimientos</p>
             <table id='tabla_movimientos' className='highlight'>
                 <thead>
                     <tr>{renderHeader()}</tr>
