@@ -2,9 +2,13 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
 
-const URL = 'http://192.168.0.15:5000/movements'
 
-const Table = () => {
+
+const Table = ({descripcion}) => {
+  
+    let URL = 'http://192.168.0.15:5000/movements/description/'+descripcion
+    
+    
     const [employees, setEmployees] = useState([])
 
     useEffect(() => {
@@ -27,7 +31,6 @@ const Table = () => {
 
     const renderHeader = () => {
         let headerElement = ['id', 'importe', 'descripcion']
-
         return headerElement.map((key, index) => {
             return <th key={index}>{key.toUpperCase()}</th>
         })

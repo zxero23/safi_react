@@ -1,19 +1,45 @@
 import React, { Component } from 'react';
 import Cookies from 'universal-cookie';
 import Table from '../components/Table/table';
+import Footer from './layout/Footer';
+import {Modal, TextField, Button} from '@material-ui/core';
+import {makeStyles} from '@material-ui/core/styles';
 
 import M from  'materialize-css/dist/js/materialize.min.js';
 
 const cookies = new Cookies();
 
+const useStyles = makeStyles((theme) => ({
+    modal: {
+      position: 'absolute',
+      width: 400,
+      backgroundColor: theme.palette.background.paper,
+      border: '2px solid #000',
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3),
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)'
+    },
+    iconos:{
+      cursor: 'pointer'
+    }, 
+    inputMaterial:{
+      width: '100%'
+    }
+  }));
+
+  
+
 class Menu extends Component {
 
-    state={
-        form:{
-            descripcion: ''
-            
-        }
-    }
+    
+    state = {
+        descripcion: '',
+        visible:false
+       }
+
+       
 
     cerrarSesion=()=>{        
         cookies.remove('usuario', {path: "/"});
@@ -31,20 +57,29 @@ class Menu extends Component {
 
     handleChange=async e=>{
         await this.setState({
-            form:{
-                ...this.state.form,
-                [e.target.name]: e.target.value
-            }
+            descripcion:
+                 e.target.value   ,          
+                visible:false
            
         });
+
     }
+
+    
+    
+       
+
+    
+   
+    
+
+    
     
     
 
     render() {
            
-        console.log('nombre: '+cookies.get('usuario'));
-        console.log('username: '+cookies.get('contrasenia'));
+        
         return (
             <div>
                 <nav className='blue' >
@@ -72,24 +107,29 @@ class Menu extends Component {
               <div className="col s7">
                 <div className="card">
                   <div className="card-content">
-                  <input                     
+                  <input
+                    className={useStyles.inputMaterial}               
                     type="text"
                     placeholder="Descripción"
                     className="form-control"
-                    name="username"                   
-                    onChange={this.handleChange}
+                    name="descripcion"                   
+                   onChange={this.handleChange}
                     />
-                  <button className = "btn btn-primary" onClick={()=>this.cerrarSesion()}>Buscar</button>  
-                  <button className = "btn btn-primary" onClick={()=>this.cerrarSesion()}>Actualizar</button>          
+                  <button className = "btn btn-primary" onClick={()=>this.setState({visible:true})}>Buscar</button>  
+                  <button className = "btn btn-primary" onClick={()=>this.setState({descripcion: '',visible:false })}>Actualizar</button>          
                   </div>
               </div>
             </div>
             </div>
             
             <div className="col s7">
-              <Table/>
+              {this.state.visible? <Table  descripcion={this.state.descripcion}/>:<div></div>}
             </div>
             </div>
+            <div>
+
+            </div>
+        
         </div>
         );
     }
