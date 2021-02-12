@@ -1,4 +1,4 @@
-{[{
+{{
                 n_id: 1,
                 n_title: 'falan9',
                 n_parentid: 0,
@@ -29,4 +29,5 @@
                 n_title: 'falan1-2-1',
                 n_parentid: 5,
                 n_elements : this.sideElm,
-            }]}
+            }
+}
