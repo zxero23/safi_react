@@ -44,6 +44,8 @@ class Menu extends Component {
     cerrarSesion=()=>{        
         cookies.remove('usuario', {path: "/"});
         cookies.remove('contrasenia', {path: "/"});
+        cookies.remove('usuario', {path: "/menu"});
+        cookies.remove('contrasenia', {path: "/menu"});
         window.location.href='./';
     }
 

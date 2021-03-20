@@ -46,7 +46,7 @@ const  Login=()=> {
                         cookies.set('usuario', user, {path: "/"});
                         cookies.set('contrasenia', pass, {path: "/"});                    
                         alert(`Bienvenido ${user} ${pass}`);
-                        window.location.href="./menu";
+                        window.location.href="./mapa";
                 }else{
                     alert('El usuario o la contraseña no son correctos');
                 }
